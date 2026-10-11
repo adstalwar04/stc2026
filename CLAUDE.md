@@ -26,7 +26,7 @@ Notes on the branches:
 
 ### `main`
 
-- `README.md`: the project title, the four-folder map, who gets what, and a quick path for the facilitator.
+- `README.md`: the attendee-facing entry point: the title, the workshop page link, the order of the prerequisite guides, and a pointer to the `participants` branch. It deliberately has no folder map and does not mention the `Facilitator` branch.
 - `1_prerequisites/README.md`: the order of the three guides (about 90 minutes in total).
 - `1_prerequisites/SETUP_GUIDE.md`: install VS Code and Python 3, sign in to Copilot Free, trust the workspace, check settings, troubleshoot.
 - `1_prerequisites/ATLASSIAN_SETUP.md`: free Atlassian site, Jira project `BRT`, Confluence space `BRT`, connect the Atlassian MCP server.
