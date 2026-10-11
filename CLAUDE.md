@@ -2,7 +2,9 @@
 
 This repo holds a hands-on workshop for technical communicators: skills, agents, hooks, plugins, and MCP, taught in VS Code with GitHub Copilot Free and a free Atlassian site. One use case runs through it: updating Brightside Co.'s "How to request time off" page.
 
-The repo is **private**. Each part of the workshop lives on its own branch so you can share a branch with the right audience. Read this file before changing anything.
+The repo is **public**, so every branch is readable by anyone, including `Facilitator`. Each part of the workshop lives on its own branch so you can point each audience at the right one. Read this file before changing anything.
+
+**Live promo page:** https://adstalwar04.github.io/stc2026/ (GitHub Pages, served from the root of `gh-pages`). Repo: https://github.com/adstalwar04/stc2026.
 
 ## Branch map
 
@@ -17,7 +19,8 @@ Notes on the branches:
 
 - `participants`, `gh-pages`, and `Facilitator` are **orphan branches**: they share no history with `main` and contain only their folder. Do not merge them into each other or into `main`.
 - The branch name is `Facilitator` with a capital F, as requested.
-- GitHub Pages on a private repo needs a paid GitHub plan. If Pages is off, the promo page still opens locally as a file.
+- GitHub Pages is on and serves `gh-pages`. A push to that branch republishes the page in about a minute.
+- Because the repo is public, the `Facilitator` branch (including the trust-challenge reveal) is visible to anyone who finds it. Do not rely on it staying hidden. Do not put anything confidential on any branch.
 
 ## What each folder contains
 
@@ -66,7 +69,7 @@ Notes on the branches:
 3. **`PARTICIPANT_HANDOUT.md` mirrors `WORKSHOP_2HR.md`.** Edit the run sheet first, then regenerate or edit the handout to match, removing the facilitator voice.
 4. **The skill, agents, and hooks exist twice**: in `solution/.github/` and in `plugin/brightside-docs-kit/`. Keep them equal. The plugin's reviewer agent has no handoff on purpose.
 5. **Paths matter.** Docs refer to `1_prerequisites/`, `2_participants/`, and `3_facilitator/` by those names and to commands like `python3 ../apply_module.py 1`. Do not rename folders without updating every doc and script (`check_setup.py` and `seed_atlassian.py` locate files relative to the workshop root).
-6. **Never leak the reveal.** `trust_challenge_evidence.md` and `reveal_comment.md` stay on `Facilitator` only. Do not copy them to `main` or `participants`.
+6. **Do not spread the reveal.** `trust_challenge_evidence.md` and `reveal_comment.md` stay on `Facilitator` only. Do not copy them to `main` or `participants`. Tell participants to use `main` and `participants` only.
 7. **Do not commit** `.DS_Store`, `__pycache__`, or tokens. No real company data anywhere: the workshop is fictional.
 8. **Use the GitHub noreply address for commits** (set repo-local `user.name` and `user.email`). Do not use a work email.
 
@@ -88,6 +91,6 @@ Notes on the branches:
 1. Check out `gh-pages`.
 2. Edit `0_promo/_build/promo_template.html`.
 3. Run `python3 0_promo/_build/build_promo.py`.
-4. Commit the template and the rebuilt `workshop_promo.html` together.
+4. Commit the template and the rebuilt `workshop_promo.html` together, and push. GitHub Pages republishes automatically.
 
 The page has a white header band (STC India logo, summit name, date, venue, and a **Reserve a seat** button linking to `https://stcindia.org/events/2026/annual-summit/register`) and a white footer band (Hands-on Workshop by Amandeep Singh Talwar, with a LinkedIn link). Event: STC India Annual Summit 2026, 4 and 5 December 2026, The Chancery Pavilion, Bengaluru.
