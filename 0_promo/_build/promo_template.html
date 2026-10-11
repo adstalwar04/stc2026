@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make AI Follow Your Style Guide | STC India Summit 2026</title>
+<meta name="description" content="A 2-hour hands-on workshop at the STC India Annual Summit 2026, Bengaluru, 4 and 5 December: skills, agents, hooks, plugins, and MCP for technical communicators, with free tools.">
+<style>
+:root{
+  --bg:#eef4f8; --bg2:#dfeaf2; --card:#ffffff; --ink:#14212b; --muted:#53626f; --line:#cfdbe4;
+  --navy:#0b3a5b; --blue:#0678ac; --blue-ink:#ffffff; --green:#1a7f5a; --amber:#b86e00; --amber-bg:#fff4dc;
+  --code:#0f1a22; --codefg:#e8f1f7; --bad:#ff8f8f; --good:#7ee2b8; --spot:#ffffff;
+  --shadow:0 10px 30px rgba(11,58,91,.14);
+  --band:#ffffff; --accent:#00953a; --accent-bg:#e7f6ec; --ink-band:#061e23;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1720; --bg2:#15212c; --card:#1b2733; --ink:#eaf1f6; --muted:#a2b2bf; --line:#2d3d4b;
+    --navy:#7cc7ee; --blue:#4cb8ea; --blue-ink:#07202e; --green:#4fd1a1; --amber:#f0b050; --amber-bg:#33280f;
+    --code:#0a1117; --spot:#22313f; --shadow:0 10px 30px rgba(0,0,0,.4);
+    --band:#101a23; --accent:#4fd1a1; --accent-bg:#163528; --ink-band:#eaf1f6;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1720; --bg2:#15212c; --card:#1b2733; --ink:#eaf1f6; --muted:#a2b2bf; --line:#2d3d4b;
+  --navy:#7cc7ee; --blue:#4cb8ea; --blue-ink:#07202e; --green:#4fd1a1; --amber:#f0b050; --amber-bg:#33280f;
+  --code:#0a1117; --spot:#22313f; --shadow:0 10px 30px rgba(0,0,0,.4);
+  --band:#101a23; --accent:#4fd1a1; --accent-bg:#163528; --ink-band:#eaf1f6;
+}
+*{box-sizing:border-box}
+html{height:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:radial-gradient(1200px 700px at 12% 8%,var(--bg2),var(--bg));color:var(--ink);
+  font-family:Aptos,Inter,"Segoe UI",system-ui,-apple-system,Arial,sans-serif;line-height:1.45;overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:10px}
+
+.slide{width:100%;max-width:1280px;margin:0 auto;flex:1 1 auto;min-height:0;padding:16px 28px 14px;display:grid;
+  grid-template-columns:minmax(300px,0.78fr) minmax(0,1.22fr);grid-template-rows:minmax(0,1fr) auto;gap:12px 28px}
+@media (min-width:980px){body{height:100vh;min-height:620px}}
+
+/* header and footer bands (white, like stcindia.org) */
+.band{background:var(--band);width:100%;flex:none}
+.hdr{border-bottom:1px solid var(--line)}
+.ftr{border-top:1px solid var(--line)}
+.band-in{max-width:1280px;margin:0 auto;padding:8px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;min-width:0}
+.logo{background:#fff;border-radius:10px;padding:2px 8px;display:flex;align-items:center;flex:none}
+.logo img{height:46px;width:auto;display:block}
+.hdr-mid{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0;flex:1;padding-left:8px}
+.badge{display:inline-flex;gap:8px;align-items:center;font-size:15px;font-weight:800;color:var(--ink-band)}
+.when{font-size:14px;font-weight:600;color:var(--muted)}
+.tools{display:flex;gap:8px;align-items:center;flex:none}
+.reserve{background:var(--blue);color:var(--blue-ink);text-decoration:none;font-weight:800;font-size:14px;border-radius:10px;padding:9px 18px;box-shadow:0 4px 12px rgba(6,120,172,.3);transition:transform .15s;white-space:nowrap}
+.reserve:hover{transform:translateY(-2px)}
+.ftr .band-in{padding:9px 28px;font-size:13.5px;color:var(--muted);flex-wrap:wrap}
+.ftr b{color:var(--ink-band)}
+.by{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+
+.li{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:var(--blue-ink);text-decoration:none;font-weight:700;font-size:13px;
+  border-radius:8px;padding:6px 12px;transition:transform .15s}
+.li:hover{transform:translateY(-1px)}
+.li svg{width:15px;height:15px;fill:currentColor;flex:none}
+
+/* top bar */
+
+/* left: headline + mascot */
+.left{display:flex;flex-direction:column;min-height:0}
+h1{font-size:clamp(28px,3.5vw,46px);line-height:1.05;margin:4px 0 10px;letter-spacing:-.02em;color:var(--navy)}
+h1 em{font-style:normal;color:var(--blue)}
+.sub{margin:0;color:var(--muted);font-size:clamp(14px,1.25vw,17px);max-width:46ch}
+.stage{position:relative;flex:1;min-height:200px;margin-top:8px;display:flex;align-items:flex-end;justify-content:center}
+.spot{position:absolute;left:50%;bottom:0;width:min(88%,360px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,var(--spot),transparent 70%);opacity:.9}
+.mascot{position:relative;height:100%;max-height:100%;width:auto;max-width:78%;object-fit:contain;object-position:bottom;
+  filter:drop-shadow(0 14px 18px rgba(11,58,91,.25));transition:transform .45s cubic-bezier(.2,.9,.3,1.2),opacity .25s}
+.mascot.swap{opacity:0;transform:translateY(14px) scale(.96)}
+.bubble{position:absolute;top:2%;right:0;max-width:62%;background:var(--card);border:1px solid var(--line);border-radius:16px 16px 16px 4px;
+  padding:10px 14px;font-size:14px;font-weight:600;box-shadow:var(--shadow);transition:opacity .25s,transform .25s}
+.bubble.swap{opacity:0;transform:translateY(6px)}
+.fact-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fact{font-size:12.5px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:3px 10px;color:var(--muted);white-space:nowrap}
+.fact b{color:var(--ink)}
+
+/* right: explorer */
+.right{display:flex;flex-direction:column;gap:12px;min-height:0}
+.prompt{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.prompt strong{color:var(--ink)}
+.dots{display:flex;gap:6px;align-items:center}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--line);transition:background .3s,transform .3s}
+.dot.on{background:var(--green);transform:scale(1.15)}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.layer{position:relative;text-align:left;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:10px 12px;
+  transition:transform .15s,border-color .15s,box-shadow .15s}
+.layer:hover{transform:translateY(-2px);border-color:var(--blue)}
+.layer[aria-pressed="true"]{border-color:var(--blue);box-shadow:0 0 0 3px rgba(6,120,172,.22),var(--shadow)}
+.layer .n{font-size:11px;color:var(--muted);font-weight:700}
+.layer .t{display:block;font-weight:800;font-size:16px;color:var(--ink)}
+.layer .v{display:inline-block;margin-top:4px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:2px 7px}
+.v.suggest{background:#e3f1fb;color:#0b5a82}.v.constrain{background:#efe6fb;color:#5b2e8f}.v.enable{background:#e0f5ec;color:#126b49}
+.v.enforce{background:#fde7e7;color:#a12626}.v.ship{background:#fff0d6;color:#8a5200}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .v{filter:brightness(.92)}}
+.layer .check{position:absolute;top:8px;right:10px;width:18px;height:18px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;
+  display:none;align-items:center;justify-content:center;font-weight:900}
+.layer.seen .check{display:flex}
+
+.panel{flex:1;min-height:0;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow);
+  display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;align-content:start;overflow:auto}
+.panel h2{grid-column:1/-1;margin:0 0 4px;font-size:clamp(22px,2.2vw,30px);color:var(--navy);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.panel h2 small{font-size:13px;font-weight:700;color:var(--muted)}
+.kv{font-size:clamp(14.5px,1.25vw,16.5px)}
+.kv h3{margin:6px 0 2px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--blue)}
+.kv p{margin:0}
+.demo{grid-column:1/-1;margin-top:6px;background:var(--code);color:var(--codefg);border-radius:12px;padding:12px 14px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:clamp(12.5px,1.1vw,14.5px);line-height:1.65;min-height:150px;white-space:pre-wrap;align-self:start}
+.demo .ln{display:block;opacity:0;transform:translateY(4px);animation:in .3s forwards}
+.demo .dim{color:#8ea3b2}.demo .bad{color:var(--bad)}.demo .good{color:var(--good)}.demo .hi{color:#8fd3ff}
+@keyframes in{to{opacity:1;transform:none}}
+.list{grid-column:1/-1;margin:2px 0 0;padding:0;list-style:none;display:grid;gap:10px;font-size:clamp(15px,1.3vw,17px)}
+.list li{padding-left:22px;position:relative}
+.list li::before{content:"";position:absolute;left:0;top:.5em;width:10px;height:10px;border-radius:3px;background:var(--blue)}
+.lead{grid-column:1/-1;margin:0;color:var(--muted);font-size:clamp(15px,1.3vw,17px)}
+.flow{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.step{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:linear-gradient(180deg,var(--card),var(--bg2))}
+.step b{display:block;font-size:26px;color:var(--blue);line-height:1}
+.step span{display:block;font-weight:800;margin-top:4px}
+.step small{color:var(--muted);font-size:13px}
+
+/* bottom bar */
+.bottom{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.info{display:flex;flex-wrap:wrap;gap:8px}
+.ibtn{border:1.5px solid var(--line);background:var(--card);border-radius:12px;padding:8px 14px;font-weight:700;font-size:14px}
+.ibtn:hover{border-color:var(--blue)}
+.ibtn[aria-pressed="true"]{background:var(--navy);color:var(--blue-ink);border-color:var(--navy)}
+.cta{display:flex;gap:10px;align-items:center}
+@keyframes pulse{50%{box-shadow:0 0 0 10px rgba(6,120,172,.2)}}
+.tour{background:var(--blue);color:var(--blue-ink);border:0;border-radius:12px;padding:12px 22px;font-weight:800;font-size:15px;box-shadow:0 6px 16px rgba(6,120,172,.38);transition:transform .15s}
+.tour:hover{transform:translateY(-2px)}
+.tour.attn{animation:pulse 1.8s ease-in-out infinite}
+
+/* confetti */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.confetti span{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:fall 1.9s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.9}}
+
+/* short laptop screens */
+@media (min-width:980px) and (max-height:850px){
+  .slide{padding:10px 28px 8px;gap:10px 28px}
+  .logo img{height:38px}.band-in{padding:5px 28px}.ftr .band-in{padding:6px 28px}
+  h1{font-size:clamp(26px,3vw,38px);margin:2px 0 6px}
+  .sub{font-size:14px}
+  .layer{padding:8px 12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.layer .n{display:none}.layer .v{margin-top:0}.layer .t{font-size:15px}.layer .check{top:6px}
+  .layers{gap:8px}.right{gap:8px}
+  .panel{padding:12px 16px}.demo{min-height:84px;padding:9px 12px;line-height:1.5}.kv h3{margin:4px 0 1px}
+  .stage{min-height:150px}.fact-row{margin-top:6px}
+  .step{padding:9px 12px}.step b{font-size:22px}
+}
+@media (min-width:980px) and (max-height:700px){.step small{display:none}.demo{min-height:70px}.lead{font-size:14px}.list{gap:6px}.kv h3{margin:3px 0 0}}
+/* small screens */
+@media (max-width:979px){
+  .slide{grid-template-columns:minmax(0,1fr);grid-template-rows:none;padding:14px 16px 24px}
+  .band-in{padding:8px 16px}.ftr .band-in{padding:10px 16px}.hdr-mid{padding-left:0}.logo img{height:38px}
+  .hdr .band-in{flex-wrap:wrap}.hdr .logo{order:1}.hdr .tools{order:2}.hdr-mid{order:3;flex-basis:100%}
+  .left{display:contents}.head{order:1}.stage{order:2;min-height:300px}.fact-row{order:3}
+  .right{order:4}.bottom{order:5}
+  .layers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .panel{grid-template-columns:minmax(0,1fr);overflow:visible}
+  .flow{grid-template-columns:1fr}
+  .bubble{max-width:70%}
+  .when{font-size:13px}
+  .cta{width:100%;justify-content:space-between}
+}
+.slide>*,.right>*,.panel>*{min-width:0}
+.dots,.prompt span:last-child{white-space:nowrap}
+.prompt{flex-wrap:wrap}
+.demo{overflow-wrap:anywhere}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+.sr{position:absolute;top:0;left:0;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header class="band hdr">
+  <div class="band-in">
+    <span class="logo"><img src="__LOGO__" alt="STC India"></span>
+    <div class="hdr-mid">
+      <span class="badge">STC India Annual Summit 2026</span>
+      <span class="when">4 &amp; 5 December 2026 &middot; The Chancery Pavilion, Bengaluru</span>
+    </div>
+    <div class="tools"><a class="reserve" id="reserve" href="https://stcindia.org/events/2026/annual-summit/register" target="_blank" rel="noopener">Reserve a seat</a></div>
+  </div>
+</header>
+
+<main class="slide" id="slide">
+
+  <section class="left">
+    <div class="head">
+      <h1>Make AI follow your <em>style guide</em>.</h1>
+      <p class="sub">A hands-on workshop for technical communicators. Turn your style guide, review checklist, and terminology list into things an AI follows, checks, or is blocked by.</p>
+    </div>
+    <div class="stage" aria-live="polite">
+      <div class="spot"></div>
+      <img id="mascot" class="mascot" alt="" src="">
+      <div id="bubble" class="bubble">Pick a layer and see what it does for your docs.</div>
+    </div>
+    <div class="fact-row factrow">
+      <span class="fact"><b>No coding</b> needed</span>
+      <span class="fact"><b>Free</b> tools</span>
+      <span class="fact"><b>Copilot Free</b></span>
+      <span class="fact">Work in <b>pairs</b></span>
+    </div>
+  </section>
+
+  <section class="right" aria-label="Explore the six layers">
+    <div class="prompt">
+      <span><strong>Tap each layer.</strong> One use case, six layers: fix a stale how-to page.</span>
+      <span class="dots" aria-label="Layers explored"><span id="count">0 of 6</span><span id="dots" class="dots"></span></span>
+    </div>
+    <div class="layers" id="layers"></div>
+    <article class="panel" id="panel" aria-live="polite"></article>
+  </section>
+
+  <div class="bottom">
+    <div class="info" id="info"></div>
+    <div class="cta">
+      <button class="tour attn" id="tour" aria-pressed="false">&#9654; 30-second tour</button>
+    </div>
+  </div>
+</main>
+
+<footer class="band ftr">
+  <div class="band-in">
+    <div class="by">
+      <span>Hands-on Workshop by <b>Amandeep Singh Talwar</b></span>
+      <a class="li" href="https://www.linkedin.com/in/amantalwar/" target="_blank" rel="noopener" aria-label="Amandeep Singh Talwar on LinkedIn (opens in a new tab)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        Connect on LinkedIn</a>
+    </div>
+    <span>&copy; 2026 STC India Annual Summit &middot; Bengaluru</span>
+  </div>
+</footer>
+<div id="confetti" class="confetti" aria-hidden="true"></div>
+<p class="sr">Keyboard: left and right arrows move between layers, number keys 1 to 6 jump, Escape returns to the start.</p>
+
+<script>
+
+const IMG = __IMAGES__;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const LAYERS = [
+  { id:"instructions", n:1, t:"Instructions", verb:"suggest", img:"reading",
+    say:"Your style guide, in a form the AI actually reads.",
+    what:"Standing orders the AI reads on every request.",
+    why:"Your style guide stops living in a PDF nobody opens. Every AI answer starts from your rules.",
+    build:"Brightside's eight editorial rules as one file the AI always follows.",
+    demo:[["dim","# copilot-instructions.md"],["hi","Use \"you\". Active voice. Sentences under 25 words."],["bad","Before: The form should be completed by the employee."],["good","After:  Complete the form. You see your balance."]] },
+  { id:"skills", n:2, t:"Skills", verb:"suggest", img:"idea",
+    say:"A checklist you can run with one command.",
+    what:"A playbook the AI loads when your request matches it.",
+    why:"Your review checklist becomes a command. Every claim on a page gets a source or a flag.",
+    build:"A /page-claim-check skill that tests each claim against the evidence.",
+    demo:[["dim","/page-claim-check docs/how-to-request-time-off.md"],["good","Supported      Requests of 3+ days need manager approval"],["bad","Unsupported    \"Approval takes a few days\""],["hi","Needs verify  Menu path: Time Off > My Requests"]] },
+  { id:"agents", n:3, t:"Agents", verb:"constrain", img:"explaining",
+    say:"The writer should never be the only reviewer.",
+    what:"A saved role with limits on what it can touch.",
+    why:"You keep separation of duties. The reviewer reads and reports. A different agent edits.",
+    build:"A read-only Doc reviewer, a Doc writer, and a hand-off button between them.",
+    demo:[["hi","Doc reviewer   tools: read, search     edits: none"],["hi","Doc writer     tools: read, edit       scope: docs/"],["dim","> Fix the page yourself."],["good","Reviewer: I can't edit. Use \"Fix the findings\" to hand off."]] },
+  { id:"mcp", n:4, t:"MCP", verb:"enable", img:"laptop",
+    say:"The AI reads the real ticket, not your copy-paste.",
+    what:"A standard plug between the AI and your tools.",
+    why:"It reads your live Jira tickets and Confluence pages, including the newest comment.",
+    build:"Atlassian connected through MCP, plus a small local server of style checks.",
+    demo:[["dim","atlassian > getJiraIssue  \"Verify UI labels\""],["good","comment: label is now \"New request\""],["dim","brightside-doc-tools > long_sentences"],["hi","2 sentences over 25 words"]] },
+  { id:"hooks", n:5, t:"Hooks", verb:"enforce", img:"confused",
+    say:"Wait, the AI broke a rule? Not any more.",
+    what:"Code that runs automatically, and can't be talked out of it.",
+    why:"Rules that must hold, like protected evidence and retired terms, are enforced, not just requested.",
+    build:"A guard that protects source files and a lint gate on every page the AI saves.",
+    demo:[["dim","AI saves docs/how-to.md"],["bad","BLOCKED retired term 'Request leave'; use 'New request'"],["dim","AI rewrites the step and saves again"],["good","PASSED lint"]] },
+  { id:"plugins", n:6, t:"Plugins", verb:"ship", img:"happy",
+    say:"Ship your team's standards in one step.",
+    what:"One installable package of all of it.",
+    why:"A new writer installs once and gets the team's skill, agent, tools, and hooks.",
+    build:"A brightside-docs-kit plugin that bundles everything you built.",
+    demo:[["dim","Install plugin: brightside-docs-kit"],["good","+ skill   page-claim-check"],["good","+ agent   Doc reviewer"],["good","+ server  brightside-doc-tools"],["good","+ hooks   guard, lint"]] }
+];
+
+const INFO = [
+  { id:"who", t:"Who it's for", img:"reading", say:"If you write, edit, or manage docs, this is for you.",
+    h:"Built for technical communicators",
+    items:["Technical writers, editors, content designers, and doc managers.","You have used an AI chat tool such as ChatGPT, Claude, Gemini, or Microsoft Copilot.","No programming, Git, or command-line experience needed. Scripts are supplied.","Not a deep dive on building MCP servers. It is a working-knowledge workshop."] },
+  { id:"bring", t:"What to bring", img:"laptop", say:"A laptop and about 90 minutes of setup beforehand.",
+    h:"Prepare in advance",
+    items:["A laptop where you can install software. A personal one is safest.","VS Code and Python 3, both free.","A free GitHub account with Copilot Free, and a free personal Atlassian account.","Step-by-step guides, a check script, and two paste-in prompts get you there."] },
+  { id:"why", t:"Why it matters", img:"thinking", say:"Same AI. Different results. The difference is the setup.",
+    h:"Standards you already own, now enforced",
+    items:["The AI is only as good as the context, checks, and limits around it. You own those.","Skills, agents, hooks, MCP, and plugins turn tribal knowledge into something the AI follows.","The ideas carry over to other tools, from Claude Code and Cursor to Microsoft 365 Copilot's agent builders."] },
+  { id:"leave", t:"What you take home", img:"happy", say:"Working files, not just slides.",
+    h:"You leave with real, reusable work",
+    items:["Instructions, a skill, two agents, an MCP setup, two hooks, and a packaged plugin.","A cheat sheet mapping each idea to other AI tools.","A one-week action plan for your own team."] }
+];
+
+const $ = s => document.querySelector(s);
+const layersEl = $("#layers"), panel = $("#panel"), infoEl = $("#info"), mascot = $("#mascot"), bubble = $("#bubble");
+const seen = new Set(); let current = null, typeToken = 0, tourTimer = null, celebrated = false;
+
+function setImage(name, say){
+  const same = mascot.dataset.name === name;
+  const apply = () => { mascot.src = IMG[name]; mascot.dataset.name = name; bubble.textContent = say;
+    mascot.classList.remove("swap"); bubble.classList.remove("swap"); };
+  if (same || reduce){ apply(); return; }
+  mascot.classList.add("swap"); bubble.classList.add("swap");
+  setTimeout(apply, 220);
+}
+
+function build(){
+  $("#dots").innerHTML = LAYERS.map(()=>'<span class="dot"></span>').join("");
+  layersEl.innerHTML = LAYERS.map(l => `
+    <button class="layer" data-id="${l.id}" aria-pressed="false">
+      <span class="check" aria-hidden="true">&#10003;</span>
+      <span class="n">${l.n}</span><span class="t">${l.t}</span><span class="v ${l.verb}">${l.verb}</span>
+    </button>`).join("");
+  infoEl.innerHTML = INFO.map(i => `<button class="ibtn" data-id="${i.id}" aria-pressed="false">${i.t}</button>`).join("");
+  layersEl.addEventListener("click", e => { const b = e.target.closest(".layer"); if (b){ stopTour(); show(b.dataset.id); } });
+  infoEl.addEventListener("click", e => { const b = e.target.closest(".ibtn"); if (b){ stopTour(); show(b.dataset.id); } });
+}
+
+function renderDemo(lines){
+  const box = panel.querySelector(".demo"); if (!box) return;
+  const token = ++typeToken; box.innerHTML = "";
+  lines.forEach((ln,i) => setTimeout(() => {
+    if (token !== typeToken) return;
+    const s = document.createElement("span"); s.className = "ln " + ln[0]; s.textContent = ln[1]; box.appendChild(s);
+  }, reduce ? 0 : i * 520));
+}
+
+function show(id){
+  const L = LAYERS.find(x => x.id === id), I = INFO.find(x => x.id === id);
+  current = id;
+  document.querySelectorAll(".layer").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.id === id)));
+  document.querySelectorAll(".ibtn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.id === id)));
+  if (L){
+    seen.add(id);
+    panel.innerHTML = `
+      <h2>${L.t} <small>${L.verb.toUpperCase()} &middot; layer ${L.n} of 6</small></h2>
+      <div class="kv"><h3>What it is</h3><p>${L.what}</p><h3>Why it helps you</h3><p>${L.why}</p></div>
+      <div class="kv"><h3>You build</h3><p>${L.build}</p></div>
+      <div class="demo" aria-label="Example"></div>`;
+    renderDemo(L.demo); setImage(L.img, L.say);
+  } else {
+    typeToken++;
+    panel.innerHTML = `<h2>${I.h}</h2><ul class="list">${I.items.map(t => `<li>${t}</li>`).join("")}</ul>`;
+    setImage(I.img, I.say);
+  }
+  updateProgress();
+  history.replaceState(null, "", "#" + id);
+}
+
+function updateProgress(){
+  document.querySelectorAll(".layer").forEach(b => b.classList.toggle("seen", seen.has(b.dataset.id)));
+  document.querySelectorAll("#dots .dot").forEach((d,i) => d.classList.toggle("on", seen.has(LAYERS[i].id)));
+  $("#count").textContent = seen.size + " of 6";
+  if (seen.size === 6 && !celebrated){ celebrated = true; celebrate(); }
+}
+
+function celebrate(){
+  $("#tour").classList.add("attn");
+  setTimeout(() => { setImage("happy", "You have seen the whole stack. Come and build it with us in Bengaluru."); }, 600);
+  if (reduce) return;
+  const c = $("#confetti"), colors = ["#0678ac","#1a7f5a","#f0b050","#a12626","#5b2e8f"];
+  for (let i = 0; i < 46; i++){
+    const s = document.createElement("span");
+    s.style.left = Math.random()*100 + "vw"; s.style.background = colors[i % colors.length];
+    s.style.animationDelay = (Math.random()*.6) + "s"; s.style.transform = "rotate(" + Math.random()*180 + "deg)";
+    c.appendChild(s);
+  }
+  setTimeout(() => c.innerHTML = "", 3200);
+}
+
+function home(){
+  stopTour(); current = null; typeToken++;
+  document.querySelectorAll(".layer,.ibtn").forEach(b => b.setAttribute("aria-pressed","false"));
+  panel.innerHTML = `
+    <h2>One stale page. Six layers of AI help.</h2>
+    <p class="lead">You update Brightside Co.'s &ldquo;How to request time off&rdquo; page after a product change. Each layer catches a different problem. At the end, a late button rename shows which layer finds the mistake and which stops it coming back.</p>
+    <ul class="list"><li><strong>Suggest</strong> with instructions and skills.</li><li><strong>Constrain</strong> with agents. <strong>Enable</strong> with MCP.</li><li><strong>Enforce</strong> with hooks. <strong>Ship</strong> with plugins.</li></ul>
+    <div class="flow">
+      <div class="step"><b>1</b><span>Set up before</span><small>About 90 minutes, with guides</small></div>
+      <div class="step"><b>2</b><span>Build in 2 hours</span><small>Six layers, in pairs, one task</small></div>
+      <div class="step"><b>3</b><span>Take it home</span><small>Working files and a cheat sheet</small></div>
+    </div>`;
+  setImage("presenting", "Pick a layer and see what it does for your docs.");
+  history.replaceState(null, "", location.pathname);
+}
+
+/* tour */
+function startTour(){
+  $("#tour").classList.remove("attn"); $("#tour").setAttribute("aria-pressed","true"); $("#tour").textContent = "❚❚ Pause tour";
+  let i = current ? Math.max(0, LAYERS.findIndex(l => l.id === current)) : 0;
+  const step = () => { show(LAYERS[i % 6].id); i++; if (i > 6){ stopTour(); } };
+  step(); tourTimer = setInterval(step, 5200);
+}
+function stopTour(){
+  if (tourTimer){ clearInterval(tourTimer); tourTimer = null; }
+  const t = $("#tour"); t.setAttribute("aria-pressed","false"); t.innerHTML = "&#9654; 30-second tour";
+}
+$("#tour").addEventListener("click", () => tourTimer ? stopTour() : startTour());
+
+/* keyboard */
+document.addEventListener("keydown", e => {
+  if (e.target.closest("input,textarea")) return;
+  const ids = LAYERS.map(l => l.id);
+  if (e.key === "Escape") { home(); return; }
+  if (/^[1-6]$/.test(e.key)) { stopTour(); show(ids[+e.key - 1]); return; }
+  if (e.key === "ArrowRight" || e.key === "ArrowLeft"){
+    stopTour(); const i = ids.indexOf(current);
+    const next = e.key === "ArrowRight" ? (i + 1) % 6 : (i <= 0 ? 5 : i - 1);
+    show(ids[next]); e.preventDefault();
+  }
+});
+
+build();
+const start = location.hash.slice(1);
+if (LAYERS.some(l => l.id === start) || INFO.some(i => i.id === start)) show(start); else home();
+</script>
+</body>
+</html>
