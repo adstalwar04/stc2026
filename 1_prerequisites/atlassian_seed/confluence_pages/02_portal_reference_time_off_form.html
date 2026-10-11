@@ -1,0 +1,35 @@
+<h2>Where to find it</h2>
+<p>Navigation path: <strong>Employee Portal &gt; Time Off &gt; My Requests</strong>.</p>
+<h2>Screenshots</h2>
+<p><em>Captured on build 0.9. Labels can change before release. Check them against the final build.</em></p>
+<h3>My Requests page</h3>
+<p><ac:image ac:width="700" ac:alt="My Requests page showing 12 days remaining, a Request leave button, and a list of past requests"><ri:attachment ri:filename="01_my_requests.png" /></ac:image></p>
+<h3>Time Off form</h3>
+<p><ac:image ac:width="700" ac:alt="Time Off form with leave type, start date, end date, note to manager, and a Submit button"><ri:attachment ri:filename="02_time_off_form.png" /></ac:image></p>
+<h3>Request submitted</h3>
+<p><ac:image ac:width="700" ac:alt="My Requests page with one request in Pending status"><ri:attachment ri:filename="03_request_pending.png" /></ac:image></p>
+<h2>Form fields</h2>
+<table><tbody>
+<tr><th>Field</th><th>Required</th><th>Notes</th></tr>
+<tr><td>Leave type</td><td>Yes</td><td>Vacation or Personal</td></tr>
+<tr><td>Start date</td><td>Yes</td><td></td></tr>
+<tr><td>End date</td><td>Yes</td><td></td></tr>
+<tr><td>Note to manager</td><td>No</td><td>Up to 200 characters</td></tr>
+</tbody></table>
+<h2>Approval rules</h2>
+<table><tbody>
+<tr><th>Request length</th><th>Approval</th><th>Submit by</th></tr>
+<tr><td>1 to 2 days</td><td>Automatic, if balance is sufficient</td><td>No minimum notice</td></tr>
+<tr><td>3 or more days</td><td>Manager, within 2 business days</td><td>5 business days before start</td></tr>
+</tbody></table>
+<h2>Statuses</h2>
+<p><ac:image ac:width="700" ac:alt="Status guide listing Pending, Approved, Declined, and Cancelled"><ri:attachment ri:filename="04_status_badges.png" /></ac:image></p>
+<ul>
+<li><strong>Pending:</strong> waiting for the manager.</li>
+<li><strong>Approved:</strong> confirmed. HR is updated automatically.</li>
+<li><strong>Declined:</strong> the manager declined. A reason is shown.</li>
+<li><strong>Cancelled:</strong> you cancelled the request.</li>
+</ul>
+<h2>Notifications</h2>
+<p>The employee gets an email when the status changes. There is no separate step to tell HR.</p>
+<p>Helper text on the form: "Requests of 3 or more days need manager approval."</p>

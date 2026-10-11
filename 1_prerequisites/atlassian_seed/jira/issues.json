@@ -1,0 +1,27 @@
+{
+  "epic": {
+    "summary": "Time Off requests move to the Employee Portal",
+    "description": "h3. Goal\nEmployees request vacation and personal days in the Employee Portal instead of by email, starting 2026-11-01.\n\nh3. Documentation scope\n* Update the employee how-to page.\n* Verify the menu path and UI labels.\n* Publish a release note.\n\nh3. Reference pages\n* Confluence: Time Off requests: feature overview\n* Confluence: Employee Portal reference: Time Off form\n* Confluence: Documentation plan: Time Off update"
+  },
+  "children": [
+    {
+      "type": "Story",
+      "summary": "Update the 'How to request time off' page",
+      "description": "h3. Why\nThe current page tells employees to email their manager and then forward the email to HR. Both steps are retired.\n\nh3. Acceptance criteria\n* The page uses the Employee Portal Time Off form.\n* The page states the approval rules for 1-2 days and 3 or more days.\n* The page states the 5-business-day notice rule for 3 or more days.\n* Every step ends with an outcome (\"You see ...\").\n* Every fact comes from the Confluence reference pages or from a Jira ticket.\n* Anything uncertain carries a verification note.\n\nh3. Sources\n* Confluence: Time Off requests: feature overview\n* Confluence: Employee Portal reference: Time Off form\n* Confluence: Documentation plan: Time Off update (editorial rules)"
+    },
+    {
+      "type": "Task",
+      "summary": "Verify Time Off menu path and UI labels before release",
+      "description": "h3. Why\nThe feature overview says the team has not confirmed the portal menu path. The screenshots on the reference page were captured on build 0.9, and labels can change before release.\n\nh3. To do\n* Confirm the menu path with product.\n* Compare every label in the screenshots with the final build.\n* Record any change as a comment on this ticket, and list the screenshots to replace.\n\nh3. Labels seen on build 0.9\n* Menu path: Employee Portal > Time Off > My Requests\n* Button on the My Requests page: Request leave\n* Form fields: Leave type, Start date, End date, Note to manager\n* Submit button: Submit"
+    },
+    {
+      "type": "Story",
+      "summary": "Write the release note for Time Off in the portal",
+      "description": "h3. Why\nEmployees and managers need a short note explaining the change before 2026-11-01.\n\nh3. Acceptance criteria\n* Names the change (email to portal form) and the effective date.\n* States what did not change (same balance, unpaid leave needs HR written approval).\n* Links to the how-to page.\n* Uses only verified labels. Check the comments on the verification ticket first.\n\nh3. Sources\n* Confluence: Time Off requests: feature overview"
+    }
+  ],
+  "reveal": {
+    "on_summary": "Verify Time Off menu path and UI labels before release",
+    "comment": "Product update: the menu path Employee Portal > Time Off > My Requests is confirmed. The button label changed after the build 0.9 screenshots were captured.\n\n* Old label (build 0.9 screenshots): Request leave\n* Final label: New request\n\nScreenshots 01_my_requests, 02_time_off_form, and 03_request_pending on the reference page show the old label and need replacing."
+  }
+}
