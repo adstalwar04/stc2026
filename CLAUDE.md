@@ -2,29 +2,32 @@
 
 This repo holds a hands-on workshop for technical communicators: skills, agents, hooks, plugins, and MCP, taught in VS Code with GitHub Copilot Free and a free Atlassian site. One use case runs through it: updating Brightside Co.'s "How to request time off" page.
 
-The repo is **public**, so every branch is readable by anyone, including `Facilitator`. Each part of the workshop lives on its own branch so you can point each audience at the right one. Read this file before changing anything.
+This file is on the public repo's `main` branch and documents all three repos. Read it before changing anything.
 
-**Live promo page:** https://adstalwar04.github.io/stc2026/ (GitHub Pages, served from the root of `gh-pages`). Repo: https://github.com/adstalwar04/stc2026.
+## Where things live
 
-## Branch map
+The workshop is split across **one public repo and two private repos**, so the facilitator and participant material is not visible to everyone.
 
-| Branch | Folder it holds | Audience | Purpose |
-|---|---|---|---|
-| `main` | `1_prerequisites/`, `README.md`, `CLAUDE.md`, `.gitignore` | Participants, before the session | Setup guides and the Atlassian content participants create. Also the entry point (`README.md`) and this file. |
-| `gh-pages` | `0_promo/`, root `index.html` | Public marketing | The single-slide promo page. `index.html` redirects to `0_promo/workshop_promo.html`. |
-| `participants` | `2_participants/` | Participants, during the session | Handout, starter workspace, finished module files, plugin, cheat sheet. |
-| `Facilitator` | `3_facilitator/` | Facilitator only | Run sheets, session listing, trust-challenge reveal. **Never merge into another branch.** |
+| Repo / branch | Visibility | Folder it holds | Audience | Purpose |
+|---|---|---|---|---|
+| `adstalwar04/stc2026`, branch `main` | Public | `1_prerequisites/`, `README.md`, `CLAUDE.md`, `.gitignore` | Participants, before the session | Setup guides and the Atlassian content participants create. Entry point and this file. |
+| `adstalwar04/stc2026`, branch `gh-pages` | Public | `0_promo/`, root `index.html` | Public marketing | The single-slide promo page, served by GitHub Pages. |
+| `adstalwar04/stc2026-participants`, branch `main` | **Private** | `2_participants/`, root `README.md` | Registered attendees | Handout, starter workspace, finished module files, plugin, cheat sheet. Access is by invitation (repo collaborators). |
+| `adstalwar04/stc2026-facilitator`, branch `main` | **Private** | `3_facilitator/`, root `README.md` | Facilitator only | Run sheets, session listing, trust-challenge reveal. |
 
-Notes on the branches:
+**Live promo page:** https://adstalwar04.github.io/stc2026/ (GitHub Pages, served from the root of `gh-pages`).
 
-- `participants`, `gh-pages`, and `Facilitator` are **orphan branches**: they share no history with `main` and contain only their folder. Do not merge them into each other or into `main`.
-- The branch name is `Facilitator` with a capital F, as requested.
+Notes:
+
+- `gh-pages` is an **orphan branch**: it shares no history with `main`. Do not merge it into `main`.
+- The public repo had `participants` and `Facilitator` branches earlier. They were moved to the private repos above and deleted from the public repo. Commits made public before the move may stay reachable by SHA, so assume the reveal was seen. Do not recreate those branches in the public repo.
+- Docs refer to `1_prerequisites/`, `2_participants/`, and `3_facilitator/` as sibling folders. Because they are now in different repos, a working copy needs all three side by side in one folder. The two private repos' READMEs say so. `3_facilitator/seed_atlassian.py` reads `1_prerequisites/atlassian_seed/`.
 - GitHub Pages is on and serves `gh-pages`. A push to that branch republishes the page in about a minute.
-- Because the repo is public, the `Facilitator` branch (including the trust-challenge reveal) is visible to anyone who finds it. Do not rely on it staying hidden. Do not put anything confidential on any branch.
+- To let an attendee see participant material, add them as a collaborator on `stc2026-participants`. Never add attendees to `stc2026-facilitator`.
 
 ## What each folder contains
 
-### `main`
+### `stc2026`, branch `main` (public)
 
 - `README.md`: the attendee-facing entry point: the title, the workshop page link, the order of the prerequisite guides, and a pointer to the `participants` branch. It deliberately has no folder map and does not mention the `Facilitator` branch.
 - `1_prerequisites/README.md`: the order of the three guides (about 90 minutes in total).
@@ -36,7 +39,7 @@ Notes on the branches:
 - `1_prerequisites/atlassian_seed/confluence_pages/`, `jira/issues.json`: the same content as Confluence storage HTML and JSON. Used by the facilitator's seed script.
 - `1_prerequisites/atlassian_seed/screenshots/`: 4 mock portal screenshots. `_screenshot_src/` holds the HTML they were rendered from.
 
-### `gh-pages`
+### `stc2026`, branch `gh-pages` (public)
 
 - `index.html`: redirect to the promo page.
 - `0_promo/workshop_promo.html`: **the built page. One self-contained file**: mascots and logo are embedded, so it needs no internet.
@@ -45,7 +48,7 @@ Notes on the branches:
 - `0_promo/_build/build_promo.py`: embeds the images into the template and writes `workshop_promo.html`. Needs Python 3 and Pillow.
 - `0_promo/_build/mascots/`, `stc_india_logo.svg`: the source images (the mascots are 8 PNGs, about 8 MB).
 
-### `participants`
+### `stc2026-participants` (private, branch `main`)
 
 - `2_participants/PARTICIPANT_HANDOUT.md`: the two-hour run sheet for participants. Generated from the facilitator run sheet with the facilitator notes removed.
 - `2_participants/brightside_workspace/`: the starter project (source material and the stale page).
@@ -54,7 +57,7 @@ Notes on the branches:
 - `2_participants/plugin/brightside-docs-kit/`: the same pieces packaged as a Claude-format plugin that VS Code reads.
 - `2_participants/CONCEPT_CHEATSHEET.md`: the same ideas in other AI tools.
 
-### `Facilitator`
+### `stc2026-facilitator` (private, branch `main`)
 
 - `3_facilitator/WORKSHOP_2HR.md`: the 2-hour run sheet with facilitator notes.
 - `3_facilitator/WORKSHOP_GUIDE.md`: the 3.5-hour full edition, with the concept detail and a 3-hour cut.
@@ -65,11 +68,11 @@ Notes on the branches:
 ## Rules for changing things
 
 1. **Keep the facts in sync.** The same facts appear in `source_material/` (workspace and solution copies), the Markdown pages in `atlassian_seed/content/`, the Confluence HTML, the screenshots, and the final page. Change all of them together.
-2. **Keep the numbers in sync.** The 2-hour agenda totals 120 minutes and the full agenda 210. Request budgets (17 and 29 per pair, plus about 2 for the prerequisite) appear in `WORKSHOP_2HR.md`, `PARTICIPANT_HANDOUT.md`, and `Facilitator/README.md`. `SESSION_LISTING.md` and the promo page state about 90 minutes of prerequisites.
+2. **Keep the numbers in sync.** The 2-hour agenda totals 120 minutes and the full agenda 210. Request budgets (17 and 29 per pair, plus about 2 for the prerequisite) appear in `WORKSHOP_2HR.md`, `PARTICIPANT_HANDOUT.md`, and `3_facilitator/README.md`. `SESSION_LISTING.md` and the promo page state about 90 minutes of prerequisites.
 3. **`PARTICIPANT_HANDOUT.md` mirrors `WORKSHOP_2HR.md`.** Edit the run sheet first, then regenerate or edit the handout to match, removing the facilitator voice.
 4. **The skill, agents, and hooks exist twice**: in `solution/.github/` and in `plugin/brightside-docs-kit/`. Keep them equal. The plugin's reviewer agent has no handoff on purpose.
 5. **Paths matter.** Docs refer to `1_prerequisites/`, `2_participants/`, and `3_facilitator/` by those names and to commands like `python3 ../apply_module.py 1`. Do not rename folders without updating every doc and script (`check_setup.py` and `seed_atlassian.py` locate files relative to the workshop root).
-6. **Do not spread the reveal.** `trust_challenge_evidence.md` and `reveal_comment.md` stay on `Facilitator` only. Do not copy them to `main` or `participants`. Tell participants to use `main` and `participants` only.
+6. **Do not spread the reveal.** `trust_challenge_evidence.md` and `reveal_comment.md` stay in the private facilitator repo only. Never copy them into the public repo or the participants repo.
 7. **Do not commit** `.DS_Store`, `__pycache__`, or tokens. No real company data anywhere: the workshop is fictional.
 8. **Use the GitHub noreply address for commits** (set repo-local `user.name` and `user.email`). Do not use a work email.
 
