@@ -56,14 +56,14 @@ The workshop's hooks and MCP server are small Python scripts. They use only the 
 3. Select **Sign in** (or **Set up Copilot**) and follow the browser prompts. Accept **Copilot Free** when offered.
 4. Return to VS Code. The chat box should accept a message.
 
-**[verify]** Copilot Free limits: 2,000 inline suggestions and about 50 chat requests per month, plus a base allowance of AI credits that chat and agent use draw from. Lighter models use the allowance more slowly. Check <https://github.com/features/copilot/plans>.
+**[verify]** Copilot Free limits: up to 2,000 inline suggestions a month, plus a monthly allowance of GitHub AI Credits that chat and agent use draw from. GitHub moved all plans to credits on 1 June 2026, and the older "50 chat requests a month" figure no longer applies. Free offers auto model selection only. Check <https://docs.github.com/en/copilot/get-started/plans>.
 
 **Do not waste your requests.** Send at most 3 test messages before the workshop. Workshop sessions are paired so two people share one account's requests.
 
 ### Smoke test (counts as 1 request)
 
 1. In the chat box, open the mode picker and choose **Agent**.
-2. Open the model picker and choose the lightest model listed.
+2. Leave the model on **Auto**. Copilot Free offers auto model selection only.
 3. Send: `Reply with the single word: ready`
 4. You see the reply `ready`.
 
@@ -156,18 +156,3 @@ If you cannot, or your employer blocks it, skip this step. You watch the Atlassi
 - **Another IDE:** Cursor supports skills, agents, hooks, and MCP. Its free tier is smaller, so you mostly watch. Copy the contents of `2_participants/solution/.github` to Cursor's equivalent folders; see `2_participants/CONCEPT_CHEATSHEET.md`.
 - **Gemini API key:** Google AI Studio issues a free key. Some editors accept it as a bring-your-own-key model.
 - **Watch-and-follow:** the facilitator demos every module. You read the files in `2_participants/solution/` and still leave with working knowledge.
-
----
-
-## Facilitator: try it yourself first (60 minutes)
-
-Run the full workshop alone before you teach it. This is the quickest way to find what breaks on your version.
-
-1. Complete Steps 0 to 7 above.
-2. Open `3_facilitator/WORKSHOP_GUIDE.md`. Do Modules 1 to 6 in order, using the "Check" line at the end of each one.
-3. Also do `ATLASSIAN_SETUP.md` on a **fresh** free site. Confirm the Atlassian MCP server connects on the Free plan; Atlassian's public pages do not say.
-4. Keep a list of: any menu name that differs, any setting that was missing, any tool name that did not resolve in the Tools picker.
-5. Update the **[verify]** items and the `tools:` line in `2_participants/solution/.github/agents/doc-reviewer.agent.md` to match what your Tools picker shows.
-6. Do the trust challenge in `3_facilitator/WORKSHOP_GUIDE.md` last. It needs the work from every module.
-
-Request budget for a full solo run: about 30 chat requests. On Copilot Free, spread a rehearsal over two sessions, or use a paid or trial Copilot account for rehearsal only.

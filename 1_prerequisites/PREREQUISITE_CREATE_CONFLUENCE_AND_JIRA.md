@@ -10,7 +10,7 @@ You use your own AI assistant to create them. That is also your first real use o
 1. A free Atlassian site with Jira project `BRT` and Confluence space `BRT`. See `ATLASSIAN_SETUP.md`, Steps 1 to 3.
 2. The Atlassian MCP server connected in VS Code. See `ATLASSIAN_SETUP.md`, Step 4. Check: the Tools picker lists `atlassian` tools.
 3. The **workshop folder** open in VS Code: **File > Open Folder** and choose the workshop folder (the one that holds `1_prerequisites` and `2_participants`). Trust the workspace.
-4. Chat in **Agent** mode, lightest model.
+4. Chat in **Agent** mode, model on **Auto**.
 
 > **Use a throwaway personal Atlassian account, never a work account.** This step gives the AI permission to create things in your Atlassian site.
 
