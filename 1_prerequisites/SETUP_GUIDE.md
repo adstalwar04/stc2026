@@ -56,14 +56,14 @@ The workshop's hooks and MCP server are small Python scripts. They use only the 
 3. Select **Sign in** (or **Set up Copilot**) and follow the browser prompts. Accept **Copilot Free** when offered.
 4. Return to VS Code. The chat box should accept a message.
 
-**[verify]** Copilot Free limits: 2,000 inline suggestions and about 50 chat requests per month, plus a base allowance of AI credits that chat and agent use draw from. Lighter models use the allowance more slowly. Check <https://github.com/features/copilot/plans>.
+**[verify]** Copilot Free limits: up to 2,000 inline suggestions a month, plus a monthly allowance of GitHub AI Credits that chat and agent use draw from. GitHub moved all plans to credits on 1 June 2026, and the older "50 chat requests a month" figure no longer applies. Free offers auto model selection only. Check <https://docs.github.com/en/copilot/get-started/plans>.
 
 **Do not waste your requests.** Send at most 3 test messages before the workshop. Workshop sessions are paired so two people share one account's requests.
 
 ### Smoke test (counts as 1 request)
 
 1. In the chat box, open the mode picker and choose **Agent**.
-2. Open the model picker and choose the lightest model listed.
+2. Leave the model on **Auto**. Copilot Free offers auto model selection only.
 3. Send: `Reply with the single word: ready`
 4. You see the reply `ready`.
 
