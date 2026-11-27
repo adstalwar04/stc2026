@@ -93,12 +93,6 @@ Follow **`PREREQUISITE_CREATE_CONFLUENCE_AND_JIRA.md`**. You paste two prompts, 
 
 ---
 
-## Trust challenge reveal
-
-During the trust challenge, add the comment the facilitator gives you to the Jira ticket "Verify Time Off menu path and UI labels before release". You copy the text, open the ticket, paste it in the **Comments** box, and save. It says the menu path is confirmed and the button is now **New request**, not **Request leave**. The agent finds it by reading the ticket through MCP.
-
----
-
 ## What the content is
 
 | Item | Source of truth for |
@@ -108,9 +102,8 @@ During the trust challenge, add the comment the facilitator gives you to the Jir
 | Confluence: Documentation plan: Time Off update | Editorial rules, review checklist, deliverables |
 | Jira epic: Time Off requests move to the Employee Portal | The feature |
 | Story: Update the 'How to request time off' page | The main writing task |
-| Task: Verify Time Off menu path and UI labels before release | The label risk. The reveal comment lands here. |
+| Task: Verify Time Off menu path and UI labels before release | The label risk. Check its comments during the workshop. |
 | Story: Write the release note for Time Off in the portal | A second deliverable |
 
 All material is fictional. The screenshots are mock-ups made for this workshop. The text lives in `1_prerequisites/atlassian_seed/content/`.
 
----
