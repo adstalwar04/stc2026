@@ -17,7 +17,7 @@ It adapts to dark mode and phone width, and respects the "reduce motion" setting
 
 ## Before you publish
 
-The page has a white header band (STC India logo, Summit name, date, venue) and a white footer band (workshop by Amandeep Talwar with a LinkedIn link, matching the look of stcindia.org). It shows the STC India logo and the Summit details (STC India Annual Summit 2026, 4 and 5 December 2026, The Chancery Pavilion, Bengaluru). It has no registration link: the STC committee manages registrations. To change the event text or add a link later, edit `_build/promo_template.html`, then rebuild:
+The page has a white header band (STC India logo, Summit name, date, venue) and a white footer band (workshop by Amandeep Singh Talwar with a LinkedIn link, matching the look of stcindia.org). It shows the STC India logo and the Summit details (STC India Annual Summit 2026, 4 and 5 December 2026, The Chancery Pavilion, Bengaluru). The header has a **Reserve a seat** button that links to `https://stcindia.org/events/2026/annual-summit/register`. To change the event text or add a link later, edit `_build/promo_template.html`, then rebuild:
 
 ```
 python3 _build/build_promo.py
